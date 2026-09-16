@@ -1,0 +1,9 @@
+[submodule "point-guard"]
+	path = point-guard
+	url = https://github.com/perintyler/point-guard.git
+[submodule "point-guard-macos"]
+	path = point-guard-macos
+	url = https://github.com/perintyler/point-guard-macos.git
+[submodule "point-guard-ios"]
+	path = point-guard-ios
+	url = https://github.com/perintyler/point-guard-ios.git

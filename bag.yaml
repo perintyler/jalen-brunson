@@ -1,0 +1,27 @@
+name: jalen-brunson
+description: Point Guard, whole — the service, the macOS app, and the iOS app as one bag
+
+# Nothing of its own: no tools, no service, no skills. This repo exists to pin
+# three separately-versioned checkouts to one commit, and this manifest exists
+# so that pinned set is installable as a single name instead of three.
+#
+# The three must ALSO be registered on their own (`barry install <path>` each)
+# for their tools to resolve. Composition is a best-effort widening — an
+# unresolved child is silently skipped rather than failing the pack, so a
+# missing one shows up as tools quietly absent, not as an error.
+#
+# `barry pack` is the ONLY thing that says so ("warning: sub-bag ... not
+# registered, skipping", cli/src/commands/bag.ts printBagWarnings). `bag
+# doctor` does not inspect composition and stays silent, and `bag show` lists
+# the child under "Composes bags" while omitting it from "Absorbed
+# namespaces" -- so the absence is visible only if you compare the two lists.
+# Read the pack output; do not take doctor's silence as confirmation.
+bags:
+  - point-guard
+  - point-guard-macos
+  - point-guard-ios
+
+# No `traits:` block on purpose. The auto-trait `jalen-brunson` already absorbs
+# the children's namespaces via `bags:` above, and a hand-written trait reusing
+# the bag's own name REPLACES that auto-trait rather than refining it — which
+# would throw away the absorption this whole manifest is for.
