@@ -1,0 +1,8 @@
+# The three bags this manifest composes. Declared in bag.yaml with a pinned
+# commit each, and fetched by `barry install` -- so a checkout here is build
+# output, not content this repo should carry. They were submodules until
+# 2026-09; committing the directories now would re-create the duplication
+# that removing the submodules got rid of.
+/point-guard/
+/point-guard-macos/
+/point-guard-ios/

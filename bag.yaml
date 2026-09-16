@@ -1,25 +1,29 @@
 name: jalen-brunson
 description: Point Guard, whole — the service, the macOS app, and the iOS app as one bag
 
-# Nothing of its own: no tools, no service, no skills. This repo exists to pin
-# three separately-versioned checkouts to one commit, and this manifest exists
-# so that pinned set is installable as a single name instead of three.
+# Nothing of its own: no tools, no service, no skills. This manifest exists so
+# three separately-versioned checkouts are installable as a single name.
 #
-# The three must ALSO be registered on their own (`barry install <path>` each)
-# for their tools to resolve. Composition is a best-effort widening — an
-# unresolved child is silently skipped rather than failing the pack, so a
-# missing one shows up as tools quietly absent, not as an error.
+# The pins below were git submodules until 2026-09. Those got the code onto
+# disk but told Barry nothing: each child still needed its own `barry install`,
+# and a child that was missing got skipped in silence — tools quietly absent
+# rather than an error, visible only by comparing `bag show`'s "Composes bags"
+# against its "Absorbed namespaces".
 #
-# `barry pack` is the ONLY thing that says so ("warning: sub-bag ... not
-# registered, skipping", cli/src/commands/bag.ts printBagWarnings). `bag
-# doctor` does not inspect composition and stays silent, and `bag show` lists
-# the child under "Composes bags" while omitting it from "Absorbed
-# namespaces" -- so the absence is visible only if you compare the two lists.
-# Read the pack output; do not take doctor's silence as confirmation.
+# Naming the source here makes the claim enforceable. `barry install <this
+# dir>` fetches all three and registers them, and a child that cannot be
+# fetched, parsed or registered fails the install outright — `repo:` says this
+# bag exists at this commit, not "compose it if it happens to be around".
 bags:
-  - point-guard
-  - point-guard-macos
-  - point-guard-ios
+  point-guard:
+    repo: perintyler/point-guard
+    rev: ee11bc8547a1366ee88c3c911605aa231ff1d1ec
+  point-guard-macos:
+    repo: perintyler/point-guard-macos
+    rev: 62f0dafe3d16d10b4cac98b17175d78b578a4b3f
+  point-guard-ios:
+    repo: perintyler/point-guard-ios
+    rev: f7dbea3d10dc3ba73be664b21802e9dfe3187b03
 
 # No `traits:` block on purpose. The auto-trait `jalen-brunson` already absorbs
 # the children's namespaces via `bags:` above, and a hand-written trait reusing
